@@ -4,7 +4,7 @@ Scriptable widgets for showing Codex usage on an iPhone or iPad Home Screen.
 
 This repository is intentionally small. It only contains two public-facing Scriptable components and a preview image. It does not include any sync scripts, server configuration, tokens, logs, or private infrastructure details.
 
-![Codex Usage Museum Label preview](assets/preview-museum-label.png)
+![Codex Usage Museum Label preview](assets/preview-museum-label-2.png)
 
 ## Widgets
 

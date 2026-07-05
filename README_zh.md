@@ -4,7 +4,7 @@
 
 这个仓库刻意保持很小。它只包含两个适合公开的 Scriptable 展示组件和一张效果图，不包含同步脚本、服务器配置、token、日志或任何私有基础设施信息。
 
-![Codex Usage Museum Label 效果图](assets/preview-museum-label.png)
+![Codex Usage Museum Label 效果图](assets/preview-museum-label-2.png)
 
 ## 小组件
 
