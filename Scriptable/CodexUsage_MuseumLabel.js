@@ -262,16 +262,20 @@ function addMuseumSpec(parent, label, value, width) {
 function addMuseumRail(parent, windowData, width, height) {
   const raw = Number(windowData?.remainingPercent);
   const value = clampedPercent(raw);
+  const railY = 4;
+  const markerSize = 8;
+  const markerLift = 2;
+  const markerY = Math.max(0, railY + (height - markerSize) / 2 - markerLift);
   const context = new DrawContext();
   context.size = new Size(width, height + 8);
   context.opaque = false;
   context.respectScreenScale = true;
 
-  roundedRect(context, 0, 4, width, height, height / 2, COLORS.rule);
+  roundedRect(context, 0, railY, width, height, height / 2, COLORS.rule);
   if (Number.isFinite(raw) && value > 0) {
     const fillWidth = Math.max(height, width * value / 100);
-    roundedRect(context, 0, 4, fillWidth, height, height / 2, COLORS.accent);
-    ellipse(context, Math.min(width - 8, Math.max(0, fillWidth - 4)), 0, 8, 8, COLORS.accent);
+    roundedRect(context, 0, railY, fillWidth, height, height / 2, COLORS.accent);
+    ellipse(context, Math.min(width - markerSize, Math.max(0, fillWidth - markerSize / 2)), markerY, markerSize, markerSize, COLORS.accent);
   }
 
   const image = parent.addImage(context.getImage());
