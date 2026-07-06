@@ -58,7 +58,7 @@ function buildWidget(payload) {
     widget.setPadding(18, 18, 16, 18);
     buildLarge(widget, payload);
   } else {
-    widget.setPadding(16, 16, 14, 16);
+    widget.setPadding(16, 16, 16, 16);
     buildMedium(widget, payload);
   }
 
@@ -78,10 +78,11 @@ function buildSmall(widget, payload) {
 }
 
 function buildMedium(widget, payload) {
+  widget.addSpacer(3);
   addTitle(widget, payload, false);
-  widget.addSpacer(9);
+  widget.addSpacer(4);
   addFineRule(widget, 292);
-  widget.addSpacer(12);
+  widget.addSpacer(7);
 
   const row = widget.addStack();
   row.layoutHorizontally();
@@ -89,8 +90,9 @@ function buildMedium(widget, payload) {
   row.addSpacer(16);
   addLabelBlock(row, "Weekly window", "W", payload.weekly, 137);
 
-  widget.addSpacer();
+  widget.addSpacer(5);
   addFooter(widget, payload);
+  widget.addSpacer(3);
 }
 
 function buildLarge(widget, payload) {
