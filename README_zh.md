@@ -2,7 +2,7 @@
 
 这是一个用于在 iPhone 或 iPad 主屏幕显示 Codex 用量的 Scriptable 小组件仓库。
 
-这个仓库刻意保持很小。它只包含两个适合公开的 Scriptable 展示组件和一张效果图，不包含同步脚本、服务器配置、token、日志或任何私有基础设施信息。
+这个仓库刻意保持很小。它只包含四个适合公开的 Scriptable 展示组件和一张效果图，不包含同步脚本、服务器配置、token、日志或任何私有基础设施信息。
 
 ![Codex Usage Museum Label 效果图](assets/preview-museum-label-v1.1.1.png)
 
@@ -10,10 +10,12 @@
 
 - `Scriptable/CodexUsageWidget.js`：基础版本，使用简洁进度条和剩余百分比展示用量。
 - `Scriptable/CodexUsage_MuseumLabel.js`：画廊展签风格版本，使用克制排版、细分隔线，并在 large 小组件中展示更完整的重置详情。
+- `Scriptable/CodexUsage_MuseumLabel_weekonly.js`：仅显示周用量的紧凑展签风格版本，针对 small、medium、large 三种尺寸重新排版，不会裁切内容。
+- `Scriptable/CodexUsage_Bars_weekonly.js`：仅显示周用量的高可读性进度条版本。
 
 `CodexUsage_MuseumLabel.js` 的视觉方向由 OpenAI Codex 借助 `design-taste-frontend` skill 辅助完成。
 
-两个组件都支持 Scriptable 的 small、medium、large 三种小组件尺寸。
+四个组件都支持 Scriptable 的 small、medium、large 三种小组件尺寸。
 
 ## 隐私边界
 
@@ -65,11 +67,27 @@ const ENDPOINT = "https://example.com/codex-usage.json";
 
 `CodexUsage_MuseumLabel.js` 还会使用 `usedPercent` 和 `resetAt` 来展示 large 小组件中的扩展信息。
 
+`CodexUsage_MuseumLabel_weekonly.js` 只读取 `weekly`，其中 `usedPercent` 是可选的，缺失时会由 `remainingPercent` 自动推算。用于它的最小 JSON 如下：
+
+```json
+{
+  "stale": false,
+  "status": "ok",
+  "updatedAtLocal": "2026-07-13 20:09:50",
+  "weekly": {
+    "remainingPercent": 32,
+    "resetAfterSeconds": 178337
+  }
+}
+```
+
+两个周额度专用组件在 Scriptable 里直接运行时会显示示例数据，以便先检查布局；作为主屏幕小组件运行时，请求失败仍会正常显示 stale 状态。
+
 ## 使用方法
 
 1. 在 iPhone 或 iPad 上安装 [Scriptable](https://scriptable.app/)。
 2. 在 Scriptable 中新建一个脚本。
-3. 复制 `Scriptable/CodexUsageWidget.js` 或 `Scriptable/CodexUsage_MuseumLabel.js` 的内容。
+3. 复制所需风格的 Scriptable 文件内容，包括任一周额度专用版本。
 4. 将 `ENDPOINT` 替换为你自己的 HTTPS JSON 地址。
 5. 在 Scriptable 中运行脚本预览效果。
 6. 添加 Scriptable 主屏幕小组件，并选择这个脚本。
